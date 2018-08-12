@@ -11,9 +11,9 @@ const SYMBOL_FUNCTION = 1;
 const SYMBOL_DATATYPE = 2;
 const SYMBOL_CLASS = 3;
 
-export class DefinitionProvider implements vscode.DefinitionProvider {	
+export class DefinitionProvider implements vscode.DefinitionProvider {
     executor:CscopeExecutor = null;
-    
+
     constructor (executor : CscopeExecutor){
         this.executor = executor;
     }
@@ -21,11 +21,10 @@ export class DefinitionProvider implements vscode.DefinitionProvider {
     public provideDefinition(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.ProviderResult<vscode.Definition> {
 
         const symbol = document.getText(document.getWordRangeAtPosition(position));
-        
-        return new Promise<vscode.Location[]>((resolve, reject) => {
-                    
-            const fileList = this.executor.findDefinition(symbol);
+
+        return new Promise<vscode.Location[]>(async (resolve, reject) => {
             let list = [];
+            const fileList = await this.executor.findDefinition(symbol);
             fileList.forEach((line) =>{
                 let fileName = line.fileName;
 //                console.log(fileName);

@@ -18,7 +18,8 @@
     },
     "homepage": "https://github.com/xulion/scope4code/blob/master/README.md",
     "categories": [
-        "Languages", "Other"
+        "Programming Languages",
+        "Other"
     ],
     "activationEvents": [
         "*",
